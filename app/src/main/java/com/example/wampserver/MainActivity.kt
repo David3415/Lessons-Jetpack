@@ -1,28 +1,22 @@
 package com.example.wampserver
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import androidx.activity.compose.setContent
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var mainApi: MainApi
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-       // enableEdgeToEdge()
-        CoroutineScope(Dispatchers.IO).launch {
-            val list = mainApi.getAllUsers()
-            list.forEach { user -> Log.d("MyLog", "User: ${user.name}") }
+        setContent() {
+            newText()
         }
     }
 }
-
-
+@Preview(showBackground = true)
+@Composable
+fun newText(){
+    Text(text = "Hello")
+}
