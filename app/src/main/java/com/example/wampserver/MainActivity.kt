@@ -52,18 +52,25 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent() {
-            LazyRow(modifier = Modifier.fillMaxWidth()
+            LazyColumn(modifier = Modifier.fillMaxWidth()
                 .padding(3.dp)
                 .background(color = MyGrey)
                 ) {
                 itemsIndexed(
                     listOf(
-                        ItemRawModel(R.drawable.plant1, "Aaa"),
-                        ItemRawModel(R.drawable.plant2, "Bbb"),
-                        ItemRawModel(R.drawable.plant3, "Ccc"),
-                        ItemRawModel(R.drawable.plant4, "Ddd"),
-                        ItemRawModel(R.drawable.i1, "Eee"),
-                        ItemRawModel(R.drawable.plant5, "Fff")
+                        ItemRawModel(R.drawable.plant1, "Aaa","testffff" +
+                                "ffffffffffffggggggggggggggggggg" +
+                                "ggggggggggggggggggggggggggggggggggggggggggggggggggggg" +
+                                "fffffffffffffffffffffffffff" +
+                                "ffffffffffffff" +
+                                "ffffffffff" +
+                                "fffffffffff" +
+                                "fdffff"),
+                        ItemRawModel(R.drawable.plant2, "Bbb","test"),
+                        ItemRawModel(R.drawable.plant3, "Ccc","test"),
+                        ItemRawModel(R.drawable.plant4, "Ddd","test"),
+                        ItemRawModel(R.drawable.i1, "Eee","test"),
+                        ItemRawModel(R.drawable.plant5, "Fff","test")
                     )
                 )
 
