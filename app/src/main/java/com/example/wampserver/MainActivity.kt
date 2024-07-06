@@ -17,6 +17,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -41,93 +44,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+var c = 0
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent() {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-                ListItem()
-            }
-
-        }
-    }
-}
-
-@Composable
-private fun ListItem() {
-    var counter = remember {
-        mutableStateOf(0)
-    }
-    var col = remember {
-        mutableStateOf(Color.Yellow)
-    }
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
-        elevation = CardDefaults.cardElevation(5.dp),
-
-        shape = RoundedCornerShape(15.dp)
-
-    ) {
-
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = col.value)
-
-
-                .pointerInput(Unit) {
-                    /* detectDragGesturesAfterLongPress { change, dragAmount ->
-                         Log.d("MyLog", "Drag Amount: $dragAmount")
-                     }*/
-                    detectTapGestures {
-                        Log.d("MyLog", "Drag : $it")
-                        when (++counter.value) {
-                            10 -> {
-                                counter.value = 0
-                                col.value = Color.Magenta
-                            }
-                        }
-                    }
-                }
-        ) {
-            Row() {
-                Image(
-
-                    painter = painterResource(id = R.drawable.i1),
-                    contentDescription = "img",
-                    contentScale = ContentScale.Crop,
-
+            LazyRow(modifier = Modifier.fillMaxWidth()) {
+                itemsIndexed(
+                    listOf(
+                        ItemRawModel(R.drawable.i1, "Aaa"),
+                        ItemRawModel(R.drawable.i1, "Aaa"),
+                        ItemRawModel(R.drawable.i1, "Aaa"),
+                        ItemRawModel(R.drawable.i1, "Aaa"),
+                        ItemRawModel(R.drawable.i1, "Aaa")
                     )
-                Column(modifier = Modifier.clickable {
-                    Log.d("MyLog", "!!!!!!!!!@@@@@@@")
-                }) {
-                    Text(text = counter.value.toString())
-                    Text(text = "!!!!!!")
+                )
+
+                { _, item ->
+                    MyRow(item = item)
                 }
-
             }
-
         }
     }
 }
+
+
+
