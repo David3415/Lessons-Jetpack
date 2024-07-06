@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -41,9 +42,18 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(count = 100) {
+                itemsIndexed(
+                    listOf(
+                        "item1",
+                        "item2",
+                        "item3",
+                        "item4",
+                        "item5",
+                        "item6",
+                    )
+                ) { index, item ->
                     Text(
-                        text = "Item $it",
+                        text = item,
                         fontSize = 30.sp,
                         modifier = Modifier.padding(vertical = 10.dp)
                     )
@@ -53,66 +63,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/*
-@Composable
-private fun ListItem() {
-    var counter = remember {
-        mutableStateOf(0)
-    }
-    var col = remember {
-        mutableStateOf(Color.Yellow)
-    }
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(10.dp),
-        elevation = CardDefaults.cardElevation(5.dp),
-
-        shape = RoundedCornerShape(15.dp)
-
-    ) {
-
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(color = col.value)
-
-
-                .pointerInput(Unit) {
-                    */
-/* detectDragGesturesAfterLongPress { change, dragAmount ->
-                         Log.d("MyLog", "Drag Amount: $dragAmount")
-                     }*//*
-
-                    detectTapGestures {
-                        Log.d("MyLog", "Drag : $it")
-                        when (++counter.value) {
-                            10 -> {
-                                counter.value = 0
-                                col.value = Color.Magenta
-                            }
-                        }
-                    }
-                }
-        ) {
-            Row() {
-                Image(
-
-                    painter = painterResource(id = R.drawable.i1),
-                    contentDescription = "img",
-                    contentScale = ContentScale.Crop,
-
-                    )
-                Column(modifier = Modifier.clickable {
-                    Log.d("MyLog", "!!!!!!!!!@@@@@@@")
-                }) {
-                    Text(text = counter.value.toString())
-                    Text(text = "!!!!!!")
-                }
-
-            }
-
-        }
-    }
-}*/
