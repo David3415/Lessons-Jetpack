@@ -8,6 +8,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,8 +28,12 @@ import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Text
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
@@ -68,6 +73,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun ListItem() {
+    var counter = remember {
+        mutableStateOf(0)
+    }
+    var col = remember {
+        mutableStateOf(Color.Yellow)
+    }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -77,27 +88,41 @@ private fun ListItem() {
         shape = RoundedCornerShape(15.dp)
 
     ) {
+
+
         Box(
             modifier = Modifier
-                .fillMaxWidth(),
-            contentAlignment = Alignment.TopStart
+                .fillMaxWidth()
+                .background(color = col.value)
+
+
+                .pointerInput(Unit) {
+                    /* detectDragGesturesAfterLongPress { change, dragAmount ->
+                         Log.d("MyLog", "Drag Amount: $dragAmount")
+                     }*/
+                    detectTapGestures {
+                        Log.d("MyLog", "Drag : $it")
+                        when (++counter.value) {
+                            10 -> {
+                                counter.value = 0
+                                col.value = Color.Magenta
+                            }
+                        }
+                    }
+                }
         ) {
             Row() {
                 Image(
-                    modifier = Modifier.pointerInput(Unit){
-                      detectDragGesturesAfterLongPress { change, dragAmount ->
-                          Log.d("MyLog", "Drag Amount: $dragAmount")
-                      }
-                    },
+
                     painter = painterResource(id = R.drawable.i1),
                     contentDescription = "img",
                     contentScale = ContentScale.Crop,
 
-                )
+                    )
                 Column(modifier = Modifier.clickable {
                     Log.d("MyLog", "!!!!!!!!!@@@@@@@")
                 }) {
-                    Text(text = "!!!!!!")
+                    Text(text = counter.value.toString())
                     Text(text = "!!!!!!")
                 }
 
