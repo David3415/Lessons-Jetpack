@@ -3,6 +3,7 @@ package com.example.wampserver
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -21,6 +22,8 @@ fun MyRow(item: ItemRawModel) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .fillMaxWidth()
+            //.background(color = Color.Green)
             .background(color = Color.White)
             .padding(3.dp)
     ) {
@@ -28,9 +31,11 @@ fun MyRow(item: ItemRawModel) {
             painter = painterResource(id = item.imageId), contentDescription = "Desc",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .padding(3.dp)
+
+
                 .size(64.dp)
                 .clip(CircleShape)
+
         )
         Text(text = item.title)
     }
